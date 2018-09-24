@@ -1,0 +1,16 @@
+﻿<!--
+/// <copyright file="App.xaml" company="Sharpro">
+/// Copyright (c) 2018 All Rights Reserved
+/// </copyright>
+/// <author>Jarosław Mielewski</author>
+/// <date>18:53</date>
+-->
+<Application x:Class="Multitasking.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Multitasking"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

@@ -1,0 +1,27 @@
+﻿extensions: designer.cs generated.cs
+extensions: .cs .cpp .h
+/******************************************************************/
+/// <copyright file="%FileName%" company="Sharpro">
+/// Copyright (c) %CurrentYear% All Rights Reserved
+/// </copyright>
+/// <author>Jarosław Mielewski</author>
+/// <date>%CreationTime%</date>
+/******************************************************************/
+extensions: .aspx .ascx
+<%-- 
+/// <copyright file="%FileName%" company="Sharpro">
+/// Copyright (c) %CurrentYear% All Rights Reserved
+/// </copyright>
+/// <author>Jarosław Mielewski</author>
+/// <date>%CreationTime%</date>
+--%>
+extensions: .vb
+'Sample license text.
+extensions:  .xml .config .xsd .xaml
+<!--
+/// <copyright file="%FileName%" company="Sharpro">
+/// Copyright (c) %CurrentYear% All Rights Reserved
+/// </copyright>
+/// <author>Jarosław Mielewski</author>
+/// <date>%CreationTime%</date>
+-->
