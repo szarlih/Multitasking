@@ -8,9 +8,6 @@
 
 namespace Multitasking
 {
-    using Multitasking.Components;
-    using System.Collections.ObjectModel;
-    using System.Linq;
     using System.Windows;
 
     /// <summary>
@@ -18,27 +15,14 @@ namespace Multitasking
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ObservableCollection<ITask> tasks;
-
         public MainWindow()
         {
             InitializeComponent();
-            tasks = new ObservableCollection<ITask>();
-            TaskListBox.ItemsSource = tasks;
         }
 
-        private async void StartButton_Click(object sender, RoutedEventArgs e)
+        private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            if(IsUnique())
-            {
-                var task = new WorkshopTask(TaskNameTextBox.Text);
-                tasks.Add(task);
-                await task.Start();
-            }
-            else
-            {
-                MessageBox.Show("Task exists");
-            }
+
         }
 
         private void StopButton_Click(object sender, RoutedEventArgs e)
@@ -49,24 +33,6 @@ namespace Multitasking
         private void RestartButton_Click(object sender, RoutedEventArgs e)
         {
 
-        }
-
-        private bool IsUnique()
-        {
-            if(!tasks.Any())
-            {
-                return true;
-            }
-
-            foreach(var task in tasks)
-            {
-                if(task.Name.Equals(TaskNameTextBox.Text))
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
     }
 }
