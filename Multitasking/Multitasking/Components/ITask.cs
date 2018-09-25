@@ -13,13 +13,14 @@
 /// <date>18:56</date>
 namespace Multitasking.Components
 {
+    using System;
     using System.Threading.Tasks;
 
-    interface ITask
+    interface ITask : IDisposable
     {
         string Name { get; }
-        Task Start();
-        void Stop();
+        Task Start(int startProgress = 0);
+        Task Stop();
         int Progress { get; }
         bool IsRunning { get; }
     }

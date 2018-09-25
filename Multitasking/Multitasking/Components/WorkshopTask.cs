@@ -16,12 +16,16 @@ namespace Multitasking.Components
 
     class WorkshopTask : ITask, INotifyPropertyChanged
     {
+        private readonly TimeSpan TaskForSureStopped = TimeSpan.FromMilliseconds(200);
+
         private static readonly Object locker = new Object();
         private int progressValue;
         private bool isRunning;
+        private CancellationTokenSource cancelSource;
 
         public WorkshopTask(string taskName)
         {
+            cancelSource = new CancellationTokenSource();
             Progress = -1;
             Name = taskName;
         }
@@ -62,16 +66,25 @@ namespace Multitasking.Components
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public async Task Start()
+        public async Task Start(int startProgress = 0)
         {
-            Progress = 0;
+            cancelSource = new CancellationTokenSource();
+            Progress = startProgress;
             isRunning = true;
             await DoWork();
         }
 
-        public void Stop()
+        public async Task Stop()
         {
             isRunning = false;
+            cancelSource.Cancel();
+            Thread.Sleep(TaskForSureStopped);
+        }
+
+        public void Dispose()
+        {
+            Stop();
+            cancelSource.Dispose();
         }
 
         private async Task DoWork()
@@ -80,10 +93,14 @@ namespace Multitasking.Components
             {
                 while (Progress < 100)
                 {
+                    if (cancelSource.IsCancellationRequested)
+                    {
+                        break;
+                    }
                     Thread.Sleep(TimeSpan.FromSeconds(1));
                     Progress++;
                 }
-            });
+            }, cancelSource.Token);
         }
     }
 }
